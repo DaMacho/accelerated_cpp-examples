@@ -1,11 +1,14 @@
+#include <algorithm>
 #include <iomanip>
 #include <ios>
 #include <iostream>
 #include <string>
+#include <vector>
 
 using std::cin;    using std::setprecision;
 using std::cout;    using std::string;
 using std::endl;    using std::streamsize;
+using std::sort;    using std::vector;
 
 int main()
 {
@@ -24,33 +27,40 @@ int main()
     cout << "Enter all your homework grades, "
     "followed by end-of-file: ";
 
-    // the number and sum of grades read so far
-    int count = 0;
-    double sum = 0;
-
-    // a variable into which to read
+    // change from here
+    vector<double> homework;
     double x;
 
     // invariant:
-    // we have read count grades so far, and
-    // sum is the sum of the first count grades
+    // var homework have read grades so far.
     while (cin >> x) {
-        ++count;
-        sum += x;
+        homework.push_back(x);
     }
+
+    // check whether read homework grade or not
+    typedef vector<double>::size_type vec_sz;
+    vec_sz size = homework.size();
+    if (size == 0) {
+	    cout << endl << "You must enter your grades. "
+		    "Please try again." << endl;
+	    return 1;
+    }
+
+    // sort grades
+    sort(homework.begin(), homework.end());
+
+    // calculate median of homework
+    vec_sz mid = size / 2;
+    double median ;
+    median = size % 2 == 0 ? (homework[mid] + homework[mid-1]) / 2
+		    : homework[mid];
+
 
     // write the result 
     streamsize prec = cout.precision();
     cout << "Your final grade is " << setprecision(3)
-    << 0.2*midterm + 0.4*final + 0.4*sum/count
+    << 0.2*midterm + 0.4*final + 0.4*median
     << setprecision(prec) << endl;
-
-    // elsewise writing the result 
-    // // set precision to 3, return previous value
-    // streamsize prec = cout.precision(3);
-    // cout << 0.2*midterm + 0.4*final + 0.4*sum/count << endl;
-    // // reset precision to its original value
-    // cout.precision(prec)
 
     return 0;
 }
