@@ -9,7 +9,13 @@ using std::endl;    using std::streamsize;
 
 /*
 Final grade calculator that calculate homework with average.
+Seperated grading calculation part into function.
  */
+
+double grade(double midterm, double final, double homework)
+{
+    return 0.2*midterm + 0.4*final + 0.4*homework;
+}
 
 int main()
 {
@@ -46,15 +52,8 @@ int main()
     // write the result 
     streamsize prec = cout.precision();
     cout << "Your final grade is " << setprecision(3)
-    << 0.2*midterm + 0.4*final + 0.4*sum/count
+    << grade(midterm, final, sum/count)
     << setprecision(prec) << endl;
-
-    // elsewise writing the result 
-    // // set precision to 3, return previous value
-    // streamsize prec = cout.precision(3);
-    // cout << 0.2*midterm + 0.4*final + 0.4*sum/count << endl;
-    // // reset precision to its original value
-    // cout.precision(prec)
 
     return 0;
 }

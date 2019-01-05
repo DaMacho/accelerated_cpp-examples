@@ -10,6 +10,10 @@ using std::cout;    using std::string;
 using std::endl;    using std::streamsize;
 using std::sort;    using std::vector;
 
+/*
+Final grade calculator that calculate homework with median.
+ */
+
 int main()
 {
     // ask for and read the student's name
